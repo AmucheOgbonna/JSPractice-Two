@@ -125,6 +125,43 @@ app.delete('/post/:post_id', async (req,res)=>{
     }
 })
 
+app.get('/profile/:user_id', async (req,res)=>{
+    try {
+    const profile = await User.findById(req.params.user_id).select("-password -__v")
+    res.status(201).send({message: "User Profile", data:profile})
+} catch (error) {
+    res.status(400).send({message: "Couldn't get Profile", error})
+}
+})
+
+app.patch('/profile/:user_id', async (req,res)=>{
+    const data =req.body;
+    try {
+    const profile = await User.findById(req.params.user_id).select("-password -__v")
+    if(!profile){
+        return res.status(400).send({
+            message:"User profile does not exist"
+        })
+    }
+    const newProfile =await User.findByIdAndUpdate(req.params.user_id,
+        {
+        $set:{fullname:data.fullname}
+        },{new: true})
+    res.status(201).send({message: "User Profile", data:newProfile})
+} catch (error) {
+    res.status(400).send({message: "Couldn't get Profile", error})
+}
+})
+
+app.delete('/profile/:user_id', async (req,res)=>{
+    try {
+    const profile = await User.findByIdAndDelete(req.params.user_id);
+    res.status(201).send({message: "User Profile Deleted", data:profile})
+} catch (error) {
+    res.status(400).send({message: "User Profile Couldn't be deleted", error})
+}
+})
+
 app.listen(port, async ()=>{
     try {
        await mongoose.connect(MONGODB_URI) ;

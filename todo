@@ -10,6 +10,6 @@ Post
 -Delete Post- /post/:post_id
 
 Profile Management
--View Profile-/profile
--Edit Profile-/profile
+-View Profile-/profile/:user_id
+-Edit Profile-/profile/:user_id
 -Delete Profile-/profile
