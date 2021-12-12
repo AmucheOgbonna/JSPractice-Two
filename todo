@@ -1,0 +1,15 @@
+Authenicaion
+-SignUp: email, password, fullname -/auth/signup
+-Login  -/auth/signin
+
+Post
+-Create Post - /post
+-Edit Post- /post/:post_id
+-View Post- /post/:post_id
+-View all posts- /post
+-Delete Post- /post/:post_id
+
+Profile Management
+-View Profile-/profile
+-Edit Profile-/profile
+-Delete Profile-/profile
