@@ -13,3 +13,7 @@ Profile Management
 -View Profile-/profile/:user_id
 -Edit Profile-/profile/:user_id
 -Delete Profile-/profile
+
+-fix password in plain test
+- implement .env
+- use jwt for password auth
