@@ -19,24 +19,22 @@ const bcrypt= require('bcrypt');
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 const auth = require('./middlewares/auth')
 
-const authRoute = require('./routes/auth');
-const postRoute = require('./routes/post');
-const profileRoute = require('./routes/profile');
+// ROUTES
+app.use("/auth",require('./routes/auth'))
+app.use("/post",require('./routes/post'))
+app.use("/profile",require('./routes/profile'))
 
-
-app.use("/auth",authRoute)
-app.use("/post",postRoute)
-app.use("/profile",profileRoute)
-
-
+// TESTING
 app.get('/ping',(req,res)=>{
     res.send("Hello World")
 })
 
+// ROUTES NOT FOUND
 app.use("**", ( req, res,next)=>{
     res.status(404).send({message:"Route not found"})
 })
 
+// ERROR MIDDLEWARE
 app.use((error, req, res,next)=>{
     console.log(error);
     res.status(500).send({message:"Something went wrong", error})
